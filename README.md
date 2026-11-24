@@ -86,11 +86,21 @@ The `src/profile-validator.ts` file demonstrates safe handling of optional field
 
 It defines a user profile type and tests three scenarios: notifications enabled, missing settings, and missing notification preferences.
 
-**Run the exercises:**
+**Run the TypeScript exercises:**
 
 ```bash
 npx tsx src/ts-basics/01-first-program.ts
+npx tsx src/ts-basics/02-tuples.ts
 npx tsx src/ts-basics/03-functions.ts
+npx tsx src/ts-basics/04-objects.ts
+npx tsx src/ts-basics/05-type-aliases.ts
+npx tsx src/ts-basics/06-union-types.ts
 npx tsx src/ts-basics/07-optional-chaining.ts
 npx tsx src/profile-validator.ts
 ```
+
+**Type-check the project:**
+
+```bash
+npx tsc --noEmit
+``````
