@@ -13,7 +13,7 @@ setDefaultTimeout(60000);
 
 const HOME_URL = 'https://practicesoftwaretesting.com';
 const PRODUCT_SELECTOR =
-  '[data-test="product-01M8BZ2QZQ03XYG44P4DTMKKTS"]';
+  '[data-test="product-01M8C2GJQVSKTG4M54DXC5MCAH"]';
 
 Before(async function () {
   this.browser = await chromium.launch({ headless: true });
