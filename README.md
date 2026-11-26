@@ -13,7 +13,7 @@ A TypeScript and Playwright project developed during Week 2 of the QA Bootcamp. 
 Clone the repository and enter the project directory:
 
 ```bash
-git clone <https://github.com/TristanBrian/qa-bootcamp-week2-starter>
+git clone https://github.com/TristanBrian/qa-bootcamp-week2-starter.git
 cd qa-bootcamp-week2-starter
 ```
 
@@ -55,6 +55,7 @@ The project includes the following automated tests:
 | `products-api.spec.ts` | Products API response |
 | `carts-api.spec.ts` | Cart creation and product addition |
 | `cart-not-found-api.spec.ts` | Non-existent cart response (404) |
+| `cart.feature` | Cucumber scenario for adding an available product to the cart |
 
 Cart creation tests include cleanup to ensure created carts are deleted, even when a test fails.
 
@@ -70,7 +71,8 @@ Cart creation tests include cleanup to ensure created carts are deleted, even wh
 
 ## Available Scripts
 
-- `npm test` - Runs the Playwright test suite.
+- `npm test` - Runs the seven Playwright UI and API tests.
+- `npm run test:bdd` - Runs the Cucumber shopping cart scenario.
 - `npm run check` - Checks the environment configuration and connectivity to the Toolshop API.
 
 ## TypeScript Practice
@@ -109,3 +111,10 @@ npx tsc --noEmit
 ## Environment and Security
 
 Never commit `.env`. It contains local configuration and may contain sensitive values. It is listed in `.gitignore` and should remain excluded from version control.
+## BDD Testing
+
+The project includes a Gherkin feature in `features/cart.feature` with Cucumber step definitions in `features/step-definitions/`. Run the scenario separately using:
+
+```bash
+npm run test:bdd
+```
