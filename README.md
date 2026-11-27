@@ -1,78 +1,83 @@
 # QA Bootcamp Week 2 Starter
 
-This is the starting point for Week 2 of the QA bootcamp. During the week you will use it to practise:
-
-- TypeScript
-- Playwright (UI testing)
-- Postman (API testing)
-- The Toolshop REST API
-
-There are no tests in this repo. You will write them during the week.
+A TypeScript and Playwright project developed during Week 2 of the QA Bootcamp. It contains UI and API tests for the Toolshop application, covering user interactions, search functionality, authentication and shopping cart operations.
 
 ## Prerequisites
 
-Install these before you start:
-
-- [Node.js](https://nodejs.org/) (the current LTS version)
+- [Node.js](https://nodejs.org/) (current LTS version)
 - [Git](https://git-scm.com/)
-- [VS Code](https://code.visualstudio.com/)
+- [VS Code](https://code.visualstudio.com/) or another code editor
 
 ## Setup
 
-Run these steps in order from a terminal.
+Clone the repository and enter the project directory:
 
-1. Clone the repo and open the folder:
+```bash
+git clone https://github.com/TristanBrian/qa-bootcamp-week2-starter.git
+cd qa-bootcamp-week2-starter
+```
 
-   ```bash
-   git clone <repo-url>
-   cd qa-bootcamp-week2-starter
-   ```
+Complete the following three steps:
 
-2. Install the dependencies:
+**1. Install dependencies and the Playwright browser**
 
-   ```bash
-   npm install
-   ```
+```bash
+npm install
+npx playwright install chromium
+```
 
-3. Install the Chromium browser for Playwright:
+**2. Configure environment variables**
 
-   ```bash
-   npx playwright install chromium
-   ```
+```bash
+cp .env.example .env
+```
 
-4. Copy `.env.example` to `.env`:
+The environment file contains the Toolshop website and API URLs. Only change them if instructed by your trainer.
 
-   ```bash
-   cp .env.example .env
-   ```
+**3. Run the test suite**
 
-   `.env` already contains the Toolshop website URL (`TOOLSHOP_URL`) and the Toolshop API URL (`TOOLSHOP_API_URL`). Only change them if your trainer gives you different URLs.
+```bash
+npm test
+```
 
-5. Check that your setup works:
+This runs the Playwright tests in the `tests/` directory.
 
-   ```bash
-   npm run check
-   ```
+## Test Coverage
 
-   This sends a GET request to the Toolshop API's `/products` endpoint (no login needed). If everything is set up correctly, it prints your Node version, the HTTP status (200), the number of products, and a last line that says `PASS`.
+The project includes the following automated tests:
 
-> **Warning:** never commit `.env`. It is where your own settings and, later in the course, your secrets (keys, tokens, passwords) live. It is listed in `.gitignore` so Git ignores it. Do not remove it from there.
+| Test file | Coverage |
+|---|---|
+| `homepage.spec.ts` | Homepage title |
+| `login.spec.ts` | Invalid login error handling |
+| `search.spec.ts` | Product search |
+| `search-no-results.spec.ts` | Search with no matching products using a Page Object |
+| `products-api.spec.ts` | Products API response |
+| `carts-api.spec.ts` | Cart creation and product addition |
+| `cart-not-found-api.spec.ts` | Non-existent cart response (404) |
+| `cart.feature` | Cucumber scenario for adding an available product to the cart |
 
-## Folders
+Cart creation tests include cleanup to ensure created carts are deleted, even when a test fails.
 
-| Folder     | What it is for |
-|------------|----------------|
-| `tests/`   | Your Playwright tests. It is empty for now; you will add tests during the week. |
-| `scripts/` | Helper scripts. `check.ts` checks your setup and is run by `npm run check`. |
+## Project Structure
 
-## Scripts
+| Directory | Purpose |
+|---|---|
+| `tests/` | Playwright UI and API tests |
+| `pages/` | Page Object classes |
+| `features/` | Gherkin feature files |
+| `scripts/` | Helper scripts |
+| `src/` | TypeScript practice exercises |
 
-- `npm run check`: checks your `.env` and that you can reach the Toolshop API.
-- `npm test`: runs the Playwright tests in `tests/`.
+## Available Scripts
+
+- `npm test` - Runs the seven Playwright UI and API tests.
+- `npm run test:bdd` - Runs the Cucumber shopping cart scenario.
+- `npm run check` - Checks the environment configuration and connectivity to the Toolshop API.
 
 ## TypeScript Practice
 
-The `src/ts-basics/` directory contains exercises covering TypeScript fundamentals:
+The `src/ts-basics/` directory contains exercises covering:
 
 - First TypeScript program and variable types
 - Tuples
@@ -84,9 +89,7 @@ The `src/ts-basics/` directory contains exercises covering TypeScript fundamenta
 
 The `src/profile-validator.ts` file demonstrates safe handling of optional fields in API responses.
 
-It defines a user profile type and tests three scenarios: notifications enabled, missing settings, and missing notification preferences.
-
-**Run the TypeScript exercises:**
+Run the TypeScript exercises using:
 
 ```bash
 npx tsx src/ts-basics/01-first-program.ts
@@ -99,8 +102,19 @@ npx tsx src/ts-basics/07-optional-chaining.ts
 npx tsx src/profile-validator.ts
 ```
 
-**Type-check the project:**
+Type-check the project:
 
 ```bash
 npx tsc --noEmit
-``````
+```
+
+## Environment and Security
+
+Never commit `.env`. It contains local configuration and may contain sensitive values. It is listed in `.gitignore` and should remain excluded from version control.
+## BDD Testing
+
+The project includes a Gherkin feature in `features/cart.feature` with Cucumber step definitions in `features/step-definitions/`. Run the scenario separately using:
+
+```bash
+npm run test:bdd
+```
